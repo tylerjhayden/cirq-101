@@ -1,0 +1,34 @@
+# Core Cirq quantum computing framework
+cirq>=1.3.0
+
+# High-performance quantum circuit simulator
+qsimcirq>=0.15.0
+
+# Quantum chemistry library
+openfermion>=1.5.1
+# openfermion-pyscf>=0.5  # Optional: only needed for VQE example, install separately if needed
+
+# TensorFlow Quantum for hybrid quantum-classical ML (optional, only for section 2.3)
+# tensorflow-quantum>=0.7.3  # Optional: may require specific Python/TensorFlow versions
+# tensorflow>=2.11.0  # Optional: uncomment if using TensorFlow Quantum
+
+# Scientific computing
+numpy>=1.23.0
+scipy>=1.10.0
+
+# Visualization
+matplotlib>=3.6.0
+
+# Graph algorithms for QAOA
+networkx>=3.0
+
+# Symbolic mathematics for parameterized circuits
+sympy>=1.11
+
+# Testing framework
+pytest>=7.2.0
+pytest-cov>=4.0.0
+
+# Jupyter notebooks for interactive learning
+jupyter>=1.0.0
+jupyterlab>=3.6.0
