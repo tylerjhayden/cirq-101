@@ -272,12 +272,12 @@ class TestHybridArchitecture:
         input_data = np.random.uniform(0, np.pi, size=4)
 
         # Run with different parameter sets
-        np.random.seed(42)
-        params1 = np.random.uniform(0, 2 * np.pi, size=36)  # 4 qubits * 3 params * 3 layers
+        rng1 = np.random.default_rng(42)
+        params1 = rng1.uniform(0, 2 * np.pi, size=36)  # 4 qubits * 3 params * 3 layers
         output1 = quantum_layer(qubits, input_data, num_layers=3, parameter_values=params1)
 
-        np.random.seed(123)
-        params2 = np.random.uniform(0, 2 * np.pi, size=36)
+        rng2 = np.random.default_rng(123)
+        params2 = rng2.uniform(0, 2 * np.pi, size=36)
         output2 = quantum_layer(qubits, input_data, num_layers=3, parameter_values=params2)
 
         # Outputs should be different with different parameters
@@ -464,12 +464,12 @@ class TestCircuitConstruction:
         circuit, params = build_pqc(qubits, num_layers=2)
 
         # Generate multiple random parameter sets and compute states
-        np.random.seed(42)
+        rng = np.random.default_rng(42)
         num_samples = 10
         states = []
 
         for _ in range(num_samples):
-            param_values = {param: np.random.uniform(0, 2 * np.pi) for param in params}
+            param_values = {param: rng.uniform(0, 2 * np.pi) for param in params}
             resolved_circuit = cirq.resolve_parameters(circuit, param_values)
 
             simulator = cirq.Simulator()

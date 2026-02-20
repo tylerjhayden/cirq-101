@@ -325,10 +325,10 @@ def calculate_approximation_ratio(achieved_cut: float, graph: nx.Graph) -> float
     max_cut = achieved_cut
     num_nodes = len(graph.nodes())
 
-    # Try random partitions (fixed seed for reproducibility)
-    np.random.seed(42)
+    # Try random partitions (caller is responsible for seeding if reproducibility is needed)
+    rng = np.random.default_rng(42)
     for _ in range(100):
-        partition = np.random.randint(0, 2, num_nodes)
+        partition = rng.integers(0, 2, num_nodes)
         cut_val = calculate_cut_value(partition, graph)
         max_cut = max(max_cut, cut_val)
 

@@ -3,7 +3,7 @@
 import cirq
 import numpy as np
 import matplotlib.pyplot as plt
-import os
+from pathlib import Path
 
 
 def _print_section_header(title):
@@ -211,8 +211,9 @@ def visualize_gate_matrices():
 
     plt.tight_layout()
     print("\nDisplaying gate matrix visualization...")
-    os.makedirs('notebooks', exist_ok=True)
-    plt.savefig('notebooks/gate_matrices.png', dpi=150, bbox_inches='tight')
+    _notebooks_dir = Path(__file__).parent.parent / 'notebooks'
+    _notebooks_dir.mkdir(exist_ok=True)
+    plt.savefig(_notebooks_dir / 'gate_matrices.png', dpi=150, bbox_inches='tight')
     print("  Saved to: notebooks/gate_matrices.png")
     plt.show()
 

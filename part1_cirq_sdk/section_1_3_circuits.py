@@ -3,6 +3,7 @@
 import cirq
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 
 def _print_section_header(title):
@@ -256,7 +257,9 @@ def visualize_circuits():
 
     plt.tight_layout()
     print("\nDisplaying circuit pattern visualization...")
-    plt.savefig('notebooks/circuit_patterns.png', dpi=150, bbox_inches='tight')
+    _notebooks_dir = Path(__file__).parent.parent / 'notebooks'
+    _notebooks_dir.mkdir(exist_ok=True)
+    plt.savefig(_notebooks_dir / 'circuit_patterns.png', dpi=150, bbox_inches='tight')
     print("  Saved to: notebooks/circuit_patterns.png")
     plt.show()
 

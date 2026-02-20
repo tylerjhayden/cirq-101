@@ -3,6 +3,7 @@
 import cirq
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 
 def _print_section_header(title):
@@ -359,7 +360,9 @@ def visualize_noise_effects():
     plt.tight_layout()
 
     print("\nDisplaying density matrix visualization...")
-    plt.savefig('notebooks/noisy_simulation_density_matrices.png', dpi=150, bbox_inches='tight')
+    _notebooks_dir = Path(__file__).parent.parent / 'notebooks'
+    _notebooks_dir.mkdir(exist_ok=True)
+    plt.savefig(_notebooks_dir / 'noisy_simulation_density_matrices.png', dpi=150, bbox_inches='tight')
     print("  Saved to: notebooks/noisy_simulation_density_matrices.png")
     plt.show()
 
@@ -412,7 +415,9 @@ def visualize_purity_vs_noise():
     plt.tight_layout()
 
     print("\nDisplaying purity vs noise strength plot...")
-    plt.savefig('notebooks/purity_vs_noise.png', dpi=150, bbox_inches='tight')
+    _notebooks_dir = Path(__file__).parent.parent / 'notebooks'
+    _notebooks_dir.mkdir(exist_ok=True)
+    plt.savefig(_notebooks_dir / 'purity_vs_noise.png', dpi=150, bbox_inches='tight')
     print("  Saved to: notebooks/purity_vs_noise.png")
     plt.show()
 
@@ -489,7 +494,9 @@ def visualize_bell_state_fidelity():
     plt.tight_layout()
 
     print("\nDisplaying Bell state fidelity plot...")
-    plt.savefig('notebooks/bell_state_fidelity.png', dpi=150, bbox_inches='tight')
+    _notebooks_dir = Path(__file__).parent.parent / 'notebooks'
+    _notebooks_dir.mkdir(exist_ok=True)
+    plt.savefig(_notebooks_dir / 'bell_state_fidelity.png', dpi=150, bbox_inches='tight')
     print("  Saved to: notebooks/bell_state_fidelity.png")
     plt.show()
 

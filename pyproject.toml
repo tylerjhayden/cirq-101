@@ -1,0 +1,2 @@
+[tool.bandit]
+skips = ["B101"]  # assert_used — acceptable in a tutorial/test context

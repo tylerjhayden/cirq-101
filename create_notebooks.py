@@ -50,7 +50,7 @@ NOTEBOOKS = {
     }
 }
 
-def create_notebook_structure(notebook_info, source_path):
+def create_notebook_structure(notebook_info, source_path, base_dir):
     """Create a notebook structure with appropriate cells."""
 
     # Read the source Python file
@@ -77,16 +77,20 @@ def create_notebook_structure(notebook_info, source_path):
         ]
     })
 
-    # Imports cell
-    module_path = str(source_path).replace('/', '.').replace('.py', '')
+    # Imports cell — module_path is built from the path relative to base_dir
+    # so that it matches the package structure when the project root is on sys.path.
+    # base_dir is passed in by the caller and has already been validated.
+    relative = source_path.relative_to(base_dir)
+    module_path = '.'.join(relative.with_suffix('').parts)
     cells.append({
         "cell_type": "code",
         "execution_count": None,
         "metadata": {},
         "outputs": [],
         "source": ["# Run the complete demonstration\\n",
-                   f"import sys\\n",
-                   f"sys.path.append('..')\\n",
+                   "import sys\\n",
+                   "from pathlib import Path\\n",
+                   "sys.path.insert(0, str(Path().resolve().parent))  # Add project root\\n",
                    f"from {module_path} import main\\n\\n",
                    "main()"]
     })
@@ -136,12 +140,15 @@ def main():
         source_path = base_dir / notebook_info['source']
         output_path = notebooks_dir / f"{notebook_name}.ipynb"
 
+        if not source_path.resolve().is_relative_to(base_dir.resolve()):
+            raise ValueError(f"Source path {source_path} escapes base directory {base_dir}")
+
         if not source_path.exists():
             print(f"⚠ Skipping {notebook_name}: source file not found at {source_path}")
             continue
 
         print(f"Creating {output_path.name}...")
-        notebook = create_notebook_structure(notebook_info, source_path)
+        notebook = create_notebook_structure(notebook_info, source_path, base_dir)
 
         with open(output_path, 'w') as f:
             json.dump(notebook, f, indent=2)

@@ -4,6 +4,7 @@ import cirq
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import Counter
+from pathlib import Path
 
 
 def _print_section_header(title):
@@ -278,7 +279,9 @@ def visualize_measurement_histograms():
     axes[2].grid(axis='y', alpha=0.3)
 
     plt.tight_layout()
-    plt.savefig('notebooks/measurement_histograms.png', dpi=150, bbox_inches='tight')
+    _notebooks_dir = Path(__file__).parent.parent / 'notebooks'
+    _notebooks_dir.mkdir(exist_ok=True)
+    plt.savefig(_notebooks_dir / 'measurement_histograms.png', dpi=150, bbox_inches='tight')
     print("\n  Saved to: notebooks/measurement_histograms.png")
     plt.show()
 
@@ -343,7 +346,9 @@ def visualize_state_vectors():
                              rotation=45, ha='right', fontsize=8)
 
     plt.tight_layout()
-    plt.savefig('notebooks/state_vectors.png', dpi=150, bbox_inches='tight')
+    _notebooks_dir = Path(__file__).parent.parent / 'notebooks'
+    _notebooks_dir.mkdir(exist_ok=True)
+    plt.savefig(_notebooks_dir / 'state_vectors.png', dpi=150, bbox_inches='tight')
     print("  Saved to: notebooks/state_vectors.png")
     plt.show()
 
