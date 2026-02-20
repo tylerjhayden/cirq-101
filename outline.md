@@ -357,17 +357,17 @@ def prepare_hartree_fock(qubits):
 def objective_function(params, qubits, hamiltonian, simulator):
     theta = params[0]
     circuit = prepare_hartree_fock(qubits) + build_vqe_ansatz(qubits, theta)
-    
+
     energy = 0.0
     for pauli_string, coefficient in hamiltonian.terms.items():
         if not pauli_string:
             energy += coefficient
             continue
-        
+
         obs = openfermion.transforms.get_pauli_sum(openfermion.QubitOperator(pauli_string))
         expectation = simulator.simulate_expectation_values(circuit, observables=obs)
         energy += coefficient * np.real(expectation)
-    
+
     return energy
 ```
 
@@ -377,20 +377,20 @@ def objective_function(params, qubits, hamiltonian, simulator):
 def run_vqe(bond_length):
     fermionic_ham, molecule = get_h2_hamiltonian(bond_length)
     qubit_ham = get_qubit_hamiltonian(fermionic_ham)
-    
+
     qubits = cirq.LineQubit.range(openfermion.count_qubits(qubit_ham))
     simulator = cirq.Simulator()
-    
+
     result = scipy.optimize.minimize(
         objective_function,
         [0.0],
         args=(qubits, qubit_ham, simulator),
         method='CG'
     )
-    
+
     optimal_energy = result.fun
     exact_energy = openfermion.get_ground_state_energy(molecule.get_molecular_hamiltonian())
-    
+
     return optimal_energy, exact_energy
 ```
 
@@ -468,7 +468,7 @@ graph = create_graph()
 def build_qaoa_circuit(graph, gamma, beta):
     qubits = sorted([cirq.LineQubit(i) for i in graph.nodes()])
     circuit = cirq.Circuit(cirq.H.on_each(*qubits))
-    
+
     # Cost layer
     for u, v, data in graph.edges(data=True):
         weight = data['weight']
@@ -477,11 +477,11 @@ def build_qaoa_circuit(graph, gamma, beta):
             cirq.rz(2 * gamma * weight).on(qubits[v]),
             cirq.CNOT(qubits[u], qubits[v])
         ])
-    
+
     # Mixer layer
     circuit.append(cirq.rx(-2 * beta).on_each(*qubits))
     circuit.append(cirq.measure(*qubits, key='result'))
-    
+
     return circuit
 ```
 
@@ -491,16 +491,16 @@ def build_qaoa_circuit(graph, gamma, beta):
 def qaoa_objective(params, graph, simulator):
     gamma_val, beta_val = params
     circuit = build_qaoa_circuit(graph, gamma_val, beta_val)
-    
+
     results = simulator.run(circuit, repetitions=5000)
     measurements = results.measurements['result']
-    
+
     cost = 0.0
     for sample in measurements:
         for u, v, data in graph.edges(data=True):
             if sample[u] != sample[v]:
                 cost += data['weight']
-    
+
     return -cost / 5000
 ```
 
@@ -596,16 +596,16 @@ def create_model_circuit():
     data_qubits = cirq.GridQubit.rect(4, 4)
     readout = cirq.GridQubit(-1, -1)
     params = sympy.symbols('q_0:32')
-    
+
     circuit = cirq.Circuit()
     for i, qubit in enumerate(data_qubits):
         circuit.append(cirq.ry(params[i])(qubit))
-    
+
     for i in range(4):
         for j in range(4):
             if i < 3: circuit.append(cirq.CZ(data_qubits[i,j], data_qubits[i+1,j]))
             if j < 3: circuit.append(cirq.CZ(data_qubits[i,j], data_qubits[i,j+1]))
-    
+
     circuit.append(cirq.ry(params[16])(readout))
     return circuit, cirq.Z(readout)
 
