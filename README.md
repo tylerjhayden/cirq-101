@@ -2,8 +2,6 @@
 
 This project is a a learning environment using Google's Cirq framework covering quantum circuit simulation, quantum chemistry, optimization algorithms, and quantum machine learning.
 
-**Built with Claude Code.**
-
 ---
 
 ## What is Cirq 101?
