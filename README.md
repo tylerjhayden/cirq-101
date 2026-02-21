@@ -319,31 +319,6 @@ Comprehensive tests verify quantum physics correctness for all utilities.
 
 ---
 
-## Project Creation Background
-
-### Developed with Claude Code
-
-Claude Code, Anthropic's AI-powered development environment, built the entire project following systematic agent-based workflows:
-
-- **Systematic Planning**: Clear objectives before implementation
-- **Agent-Based Development**: Specialized subagents implement sections in parallel
-- **Quality Gates**: Continuous quantum correctness verification
-- **CLAUDE.md Compliance**: Strict adherence to development guidelines (see `CLAUDE.md`)
-
-### Development Methodology
-
-The process followed rigorous engineering discipline:
-
-1. **Specification**: Define learning objectives and quantum physics requirements
-2. **Test Design**: Write comprehensive tests covering physics correctness and edge cases
-3. **Implementation**: Write minimal code to pass tests
-4. **Verification**: Validate quantum properties (unitarity, hermiticity, measurement statistics)
-5. **Refinement**: Refactor for clarity while maintaining green tests
-
-This methodology kept quantum physics correct throughout development—critical when subtle bugs can produce physically invalid results.
-
----
-
 ## Project Statistics (double check before publishing)
 
 ### Code Base
@@ -450,7 +425,6 @@ The project maintains high code quality:
 
 - **Shared Utilities**: Common operations factored into reusable functions
 - **Bug Fixes**: Systematic fixes for issues discovered during testing
-- **CLAUDE.md Compliance**: All code follows project development guidelines
 - **Documentation**: Every function includes docstrings and physics context
 - **Physics-First Naming**: Functions named by quantum operation, not implementation
 
@@ -460,12 +434,7 @@ The project maintains high code quality:
 
 ### Agent-Based Implementation
 
-The project leveraged Claude Code's agent-based workflow:
-
-**Main Agent**: Overall architecture, test design, integration
-**Subagents**: Parallel implementation of independent sections
-
-This enabled efficient development of 9 complete implementations while maintaining consistency and quality. Each subagent focused on a specific section, implementing tests and code according to TDD principles.
+This project was built with Claude Code.
 
 ### Quality Gates
 
@@ -538,7 +507,6 @@ The included examples use 2-16 qubits, appropriate for local simulation.
 
 ### This Repository
 - `outline.md` - Complete course outline from source textbook material
-- `CLAUDE.md` - Development methodology and guidelines used to build this project
 - `notebooks/` - Interactive Jupyter notebooks for hands-on learning
 
 ### Further Learning
@@ -550,7 +518,7 @@ The included examples use 2-16 qubits, appropriate for local simulation.
 
 ## Development Guidelines
 
-This project follows strict guidelines documented in `CLAUDE.md`. Key principles:
+This project follows guidelines. Key principles:
 
 - **Test-Driven Development**: All code emerged from tests
 - **Physics First**: Quantum correctness before implementation details
@@ -558,23 +526,11 @@ This project follows strict guidelines documented in `CLAUDE.md`. Key principles
 - **Hardware Awareness**: Consider real quantum device constraints
 - **Clean Code**: Readability and maintainability over cleverness
 
-Contributors should read `CLAUDE.md` to understand the development philosophy.
-
 ---
 
 ## License
 
 This is an educational project created to demonstrate quantum computing with Cirq. The code is provided for learning purposes.
-
----
-
-## Acknowledgments
-
-**Built with Claude Code**: Anthropic's Claude Code developed this entire project, demonstrating AI-assisted software development for complex quantum computing applications.
-
-**Test-Driven Development**: Rigorous TDD methodology ensured correctness at every step, catching subtle quantum physics bugs difficult to find through manual testing.
-
-**Google Cirq Team**: For creating an exceptional quantum programming framework balancing accessibility with low-level hardware control.
 
 ---
 
